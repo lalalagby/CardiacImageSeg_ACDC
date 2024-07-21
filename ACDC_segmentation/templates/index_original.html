@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Image Segmentation</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 50px;
+        }
+        .container {
+            max-width: 800px;
+        }
+        .image-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .image-box {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 20px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .header {
+            margin-bottom: 40px;
+        }
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .btn-container .btn {
+            width: 150px;
+            height: 40px;
+        }
+        .file-input {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center header">Medical Image Segmentation</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="image-container">
+                    <div class="image-box">
+                        <h2>Original Image</h2>
+                        <img src="{{ url_for('static', filename='images/original_image.png') }}" alt="Original Image">
+                        <div class="btn-container">
+                            <label for="file-upload" class="btn btn-secondary">Choose file</label>
+                            <input id="file-upload" type="file" class="file-input">
+                            <button class="btn btn-primary">Upload</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="image-container">
+                    <div class="image-box">
+                        <h2>Segmented Image</h2>
+                        <img src="{{ url_for('static', filename='images/segmented_image.png') }}" alt="Segmented Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.querySelector('.btn-container .btn-primary').addEventListener('click', function() {
+            const fileInput = document.getElementById('file-upload');
+            if (!fileInput.files.length) {
+                alert('Please choose a file before uploading.');
+            }
+        });
+    </script>
+</body>
+</html>
