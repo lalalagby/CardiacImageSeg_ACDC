@@ -124,7 +124,7 @@ class ResNetV2(nn.Module):
             ('relu', nn.ReLU(inplace=True)),
             # ('pool', nn.MaxPool2d(kernel_size=3, stride=2, padding=0))
         ]))
-        # 减少CNN的block的数量
+        
         self.body = nn.Sequential(OrderedDict([
             ('block1', nn.Sequential(OrderedDict(
                 [('unit1', PreActBottleneck(cin=width, cout=width * 4, cmid=width))] +
