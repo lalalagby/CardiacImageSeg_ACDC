@@ -15,7 +15,6 @@ This repo holds code for [TransUNet: Transformers Make Strong Encoders for Medic
 │   │       └──...
 │   ├──train.py
 │   ├──test.py
-│   ├──dataset_preprocess.py
 │   └──...
 ├── model
 │   └── vit_checkpoint
@@ -73,7 +72,7 @@ python test.py --dataset ACDC --vit_name R50-ViT-B_16 --is_savenii --max_epochs 
 ```
 
 ## Our models
-* [Get our models in this link](https://drive.google.com/drive/folders/15BLoKhiJCowPlYBgbJMsPUa0OEd5wzf5?usp=sharing)
+* [Get the trained FLA-TransUNet model in this link](https://drive.google.com/drive/folders/15BLoKhiJCowPlYBgbJMsPUa0OEd5wzf5?usp=sharing)
 
 ## Reference
 * [Google ViT](https://github.com/google-research/vision_transformer)
