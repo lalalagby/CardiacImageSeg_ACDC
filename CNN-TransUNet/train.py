@@ -72,7 +72,7 @@ if __name__ == "__main__":
         config_vit.patches.grid = (int(args.img_size / args.vit_patches_size), int(args.img_size / args.vit_patches_size))
 
     net = ViT_seg(config_vit, img_size=args.img_size, num_classes=config_vit.n_classes)
-    # 修改模型不再加载与训练模型参数
+
     # net.load_from(weights=np.load(config_vit.pretrained_path))
     trainer = {'Synapse': trainer_synapse}
     trainer[dataset_name](args, net, snapshot_path)
