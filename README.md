@@ -8,7 +8,7 @@ This repo holds code for [TransUNet: Transformers Make Strong Encoders for Medic
 .
 ├── FLA-TransUNet
 │   ├──datasets
-│   │       └── dataset_*.py
+│   │       └── dataset_acdc.py
 │   ├──lists
 │   │       └──...
 │   ├──networks
@@ -41,9 +41,9 @@ mkdir ../model/vit_checkpoint/imagenet21k &&
 mv {MODEL_NAME}.npz ../model/vit_checkpoint/imagenet21k/{MODEL_NAME}.npz
 ```
 
-### 2. Prepare data
+### 2. Dataset
 
-Use [ACDC](https://www.kaggle.com/datasets/samdazel/automated-cardiac-diagnosis-challenge-miccai17) dataset. And please use [dataset_preprocess](FLA-TransUNet/dataset_preprocess) to process the train and test data into npz format and write the names of all the train and test data into train.txt and test.txt respectively.
+The dataset we use is Automated Cardiac Diagnosis Challenge [(ACDC)](https://www.kaggle.com/datasets/samdazel/automated-cardiac-diagnosis-challenge-miccai17). 
 
 ### 3. Environment
 
