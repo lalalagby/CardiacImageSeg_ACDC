@@ -18,13 +18,11 @@ from torchvision import transforms
 def trainer_acdc(args, model, snapshot_path):
     from datasets.dataset_acdc import BaseDataSets, RandomGenerator
 
-    # 设置参数
     base_lr = args.base_lr
     num_classes = args.num_classes
     batch_size = args.batch_size
     max_iterations = args.max_iterations
 
-    # 加载数据，RandomGenerator 是一个数据增强转换类，用于对训练数据进行随机裁剪或变换。
     db_train = BaseDataSets(base_dir=args.root_path, split="train", transform=transforms.Compose([
         RandomGenerator([args.img_size, args.img_size])]))
     db_val = BaseDataSets(base_dir=args.root_path, split="val")
@@ -35,26 +33,22 @@ def trainer_acdc(args, model, snapshot_path):
     valloader = DataLoader(db_val, batch_size=1, shuffle=False,
                            num_workers=1)
 
-    # 模型设置和优化器 model.train() 设置模型为训练模式。SGD 优化器用于更新模型参数，CrossEntropyLoss 和 DiceLoss 是损失函数。
     model.train()
     optimizer = optim.SGD(model.parameters(), lr=base_lr,
                           momentum=0.9, weight_decay=0.0001)
     ce_loss = CrossEntropyLoss(ignore_index=4)
     dice_loss = DiceLoss(num_classes)
     
-    # 日志
     writer = SummaryWriter(snapshot_path + '/log')
     logging.info("{} iterations per epoch".format(len(trainloader)))
     logging.info("{} val iterations per epoch".format(len(valloader)))
     #logging.info("{} test iterations per epoch".format(len(testloader)))
 
-    # 计算最大训练周期和初始化最佳性能指标。使用 tqdm 显示训练进度条。
     iter_num = 0
     max_epoch = max_iterations // len(trainloader) + 1
     best_performance = 0.0
     iterator = tqdm(range(max_epoch), ncols=70)
 
-    # 每个 epoch 内部循环遍历训练数据。数据送入 GPU，计算模型输出和损失，进行反向传播并更新模型参数。
     for epoch_num in iterator:
         for i_batch, sampled_batch in enumerate(trainloader):
             volume_batch, label_batch = sampled_batch['image'], sampled_batch['label']
@@ -66,7 +60,7 @@ def trainer_acdc(args, model, snapshot_path):
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
-            # 学习率调整和指标记录
+
             lr_ = base_lr * (1.0 - iter_num / max_iterations) ** 0.9
             for param_group in optimizer.param_groups:
                 param_group['lr'] = lr_
@@ -79,7 +73,6 @@ def trainer_acdc(args, model, snapshot_path):
             logging.info('iteration %d : loss : %f, loss_ce: %f' % (iter_num, loss.item(), loss_ce.item()))
 
 
-            # 验证和模型保存
             if iter_num % 20 == 0:
                 image = volume_batch[1, 0:1, :, :]
                 image = (image - image.min()) / (image.max() - image.min())
