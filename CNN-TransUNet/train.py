@@ -3,12 +3,12 @@ import numpy as np
 import torch.backends.cudnn as cudnn
 from networks.vit_seg_modeling import VisionTransformer as ViT_seg
 from networks.vit_seg_modeling import CONFIGS as CONFIGS_ViT_seg
-from trainer import trainer_synapse
+from trainer import trainer_ACDC
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--root_path', type=str, default='../data/Synapse/train_npz', help='root dir for data')
+parser.add_argument('--root_path', type=str, default='../data/ACDC/train_npz', help='root dir for data')
 parser.add_argument('--dataset', type=str, default='Synapse', help='experiment_name')
-parser.add_argument('--list_dir', type=str, default='./lists/lists_Synapse', help='list dir')
+parser.add_argument('--list_dir', type=str, default='./lists/lists_ACDC', help='list dir')
 parser.add_argument('--num_classes', type=int, default=9, help='output channel of network')
 parser.add_argument('--max_iterations', type=int, default=30000, help='maximum epoch number to train')
 parser.add_argument('--max_epochs', type=int, default=150, help='maximum epoch number to train')
@@ -39,8 +39,8 @@ if __name__ == "__main__":
     dataset_name = args.dataset
     dataset_config = {
         'Synapse': {
-            'root_path': '../data/Synapse/train_npz',
-            'list_dir': './lists/lists_Synapse',
+            'root_path': '../data/ACDC/train_npz',
+            'list_dir': './lists/lists_ACDC',
             'num_classes': 9,
         },
     }
@@ -74,5 +74,5 @@ if __name__ == "__main__":
     net = ViT_seg(config_vit, img_size=args.img_size, num_classes=config_vit.n_classes)
 
     # net.load_from(weights=np.load(config_vit.pretrained_path))
-    trainer = {'Synapse': trainer_synapse}
+    trainer = {'ACDC': trainer_synapse}
     trainer[dataset_name](args, net, snapshot_path)
