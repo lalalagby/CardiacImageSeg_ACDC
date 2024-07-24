@@ -16,13 +16,13 @@ from networks.vit_seg_modeling import CONFIGS as CONFIGS_ViT_seg
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--volume_path', type=str,
-                    default='../data/Synapse/test_vol_h5', help='root dir for validation volume data')  # for acdc volume_path=root_dir
+                    default='../data/ACDC/test_vol_h5', help='root dir for validation volume data')  # for acdc volume_path=root_dir
 parser.add_argument('--dataset', type=str,
-                    default='Synapse', help='experiment_name')
+                    default='ACDC', help='experiment_name')
 parser.add_argument('--num_classes', type=int,
                     default=4, help='output channel of network')
 parser.add_argument('--list_dir', type=str,
-                    default='./lists/lists_Synapse', help='list dir')
+                    default='./lists/lists_ACDC', help='list dir')
 
 parser.add_argument('--max_iterations', type=int,default=20000, help='maximum epoch number to train')
 parser.add_argument('--max_epochs', type=int, default=30, help='maximum epoch number to train')
