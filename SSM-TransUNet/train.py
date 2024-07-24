@@ -19,7 +19,7 @@ parser.add_argument('--max_epochs', type=int, default=50, help='maximum epoch nu
 parser.add_argument('--batch_size', type=int, default=24, help='batch_size per gpu')
 parser.add_argument('--n_gpu', type=int, default=1, help='total gpu')
 parser.add_argument('--deterministic', type=int, default=1, help='whether use deterministic training')
-parser.add_argument('--base_lr', type=float, default=0.005, help='segmentation network learning rate')
+parser.add_argument('--base_lr', type=float, default=0.01, help='segmentation network learning rate')
 parser.add_argument('--img_size', type=int, default=224, help='input patch size of network input')
 parser.add_argument('--seed', type=int, default=1234, help='random seed')
 parser.add_argument('--n_skip', type=int, default=3, help='using number of skip-connect, default is num')
